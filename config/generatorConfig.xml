@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+
+    <!-- !!!! Driver Class Path !!!! -->
+    <classPathEntry
+            location="C:\\Users\\wangcong\\Desktop\\mybatisGenerator\\mysql-connector-java-5.1.13.jar"/>
+
+    <context id="context" targetRuntime="MyBatis3">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <!--序列化支持-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+		<!--toString反射方法重写支持-->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+		<!--类中枚举支持-->
+        <plugin type="org.mybatis.generator.plugins.ConstantPlugin"/>
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+            <property name="ignoreField" value="false"/>
+			<!-- 修改作者名称 -->
+			<property name="author" value="wangcong"/>
+			<!-- 是否生成swagger注解，不需要注释掉，改成false没用 -->
+			<property name="swagger" value="true"/>
+        </commentGenerator>
+
+        <!-- !!!! Database Configurations !!!! -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/bitbid?tinyInt1isBit=false"
+                        userId="root" password="pw1234"/>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- !!!! Model Configurations !!!! -->
+        <javaModelGenerator targetPackage="model" targetProject="src">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- !!!! Mapper XML Configurations !!!! -->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- !!!! Mapper Interface Configurations !!!! -->
+        <javaClientGenerator targetPackage="dao" targetProject="src"
+                             type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!-- !!!! Table Configurations !!!! -->
+        <table schema="bitbid" tableName="t_module" domainObjectName="Module">
+			<!--insert支持自增-->
+            <generatedKey column="OBJECT_ID" sqlStatement="JDBC"/>
+        </table>
+        <!-- <table schema="bibenet_supervision" tableName="t_contact" domainObjectName="Contact">
+			insert支持selectKey
+            <generatedKey column="OBJECT_ID" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table schema="bibenet_supervision" tableName="t_contract" domainObjectName="Contract">
+            <generatedKey column="OBJECT_ID" sqlStatement="MySql" identity="true"/>
+        </table>
+        -->
+
+    </context>
+</generatorConfiguration>
