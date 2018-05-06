@@ -58,14 +58,11 @@ public class WhereSQLListElementGenerator extends AbstractXmlElementGenerator {
             sb.append(introspectedColumn.getJavaProperty());
             sb.append(" != null"); //$NON-NLS-1$
 
-            if(i > 0){
-                sb.append("and");
-            }
-
             insertNotNullElement.addAttribute(new Attribute(
                     "test", sb.toString())); //$NON-NLS-1$
 
             sb.setLength(0);
+            sb.append("and ");
             sb.append(MyBatis3FormattingUtilities
                     .getEscapedColumnName(introspectedColumn));
             sb.append(" = "); //$NON-NLS-1$

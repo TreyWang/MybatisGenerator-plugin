@@ -244,7 +244,7 @@ public class DefaultCommentGenerator implements CommentGenerator {
         //添加导入类的信息
         //innerClass.addJavaDocLine("import org.springframework.format.annotation
         // .DateTimeFormat;");
-        //topLevelClass.addJavaDocLine("import com.fasterxml.jackson.annotation.JsonFormat;");
+        innerClass.addJavaDocLine("import com.fasterxml.jackson.annotation.JsonFormat;");
         innerClass.addJavaDocLine("import io.swagger.annotations.ApiModel;");
         innerClass.addJavaDocLine("import io.swagger.annotations.ApiModelProperty;");
 
@@ -371,14 +371,16 @@ public class DefaultCommentGenerator implements CommentGenerator {
             field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");
 
             //当字段数据类型为date时添加日期注释
-//            StringBuffer dateSb = new StringBuffer();
-//            if(introspectedColumn.getJdbcType() == 93) {
-//                dateSb.append("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
-//            }
-//
-//            if(dateSb.length() > 0) {
-//                field.addJavaDocLine(sb.toString());
-//            }
+            StringBuffer dateSb = new StringBuffer();
+            if(introspectedColumn.getJdbcType() == 93) {
+                //dateSb.append("@DateTimeFormat(pattern = \"yyyy-MM-dd HH:mm:ss\")");
+                dateSb.append("@JsonFormat(timezone = \"GMT+8\", pattern = \"yyyy-MM-dd " +
+                        "hh:mm:ss\")");
+            }
+
+            if(dateSb.length() > 0) {
+                field.addJavaDocLine(dateSb.toString());
+            }
         }
     }
 

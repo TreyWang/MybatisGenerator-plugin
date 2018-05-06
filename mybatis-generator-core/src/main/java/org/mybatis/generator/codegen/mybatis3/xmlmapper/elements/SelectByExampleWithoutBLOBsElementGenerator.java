@@ -35,7 +35,7 @@ public class SelectByExampleWithoutBLOBsElementGenerator extends
 
     @Override
     public void addElements(XmlElement parentElement) {
-        String fqjt = introspectedTable.getExampleType();
+        String fqjt = introspectedTable.getBaseRecordType();
 
         XmlElement answer = new XmlElement("select"); //$NON-NLS-1$
 
